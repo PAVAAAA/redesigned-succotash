@@ -1,0 +1,20 @@
+# redesigned-succotash
+Tools to Scan and Detect Fake Apps/Websites
+import requests
+
+def scan_website(url):
+    # Use Google Safe Browsing API or VirusTotal for better results
+    try:
+        response = requests.get(url, timeout=10)
+        if response.status_code == 200:
+            print(f"Website {url} is reachable.")
+            # Example: Check for suspicious keywords
+            if "login" in response.text.lower() or "password" in response.text.lower():
+                print("⚠️ Warning: Login-related keywords found. Investigate further.")
+        else:
+            print(f"Website {url} returned status code {response.status_code}.")
+    except Exception as e:
+        print(f"Error scanning website {url}: {e}")
+
+# Test the script
+scan_website("http://example-fake-site.com")
